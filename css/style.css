@@ -1,54 +1,134 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   user-select: none;
 }
 
 body {
-  background-image: url(../img/img1.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+   background-image: url(../img/img1.jpg);
+   background-size: cover;
+   background-repeat: no-repeat;
 }
 
 .header {
-  width: 100%;
-  background-color: rgba(206, 255, 255, 0.1);
-  height: 100px;
+   display: flex;
+   width: 100%;
+   background-color: rgba(206, 255, 255, 0.1);
+   height: 100px;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 10px;
 }
 
 .date {
-  color: white;
-  font-size: 30px;
+   color: white;
+   font-size: 30px;
 }
 
 .content {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  text-align: center;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column;
+   text-align: center;
 }
 
 .time_box {
-  margin-bottom: 40px;
+   margin-bottom: 40px;
 }
 
 .time {
-  font-size: 144px;
-  color: white;
-  height: 150px;
-  line-height: 120px;
+   font-size: 144px;
+   color: white;
+   height: 150px;
+   line-height: 120px;
+}
+
+.messege_box {
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .messege {
-  color: white;
-  height: 150px;
-  font-size: 55px;
+   color: white;
+   font-size: 55px;
+}
+
+.name {
+   margin-top: 10px;
+   width: 150px;
+   height: 60px;
+   box-sizing: border-box;
+   min-width: 150px;
+   max-width: 400px;
+   text-align: center;
+   color: white;
+   margin-left: 20px;
+}
+
+input:focus::placeholder {
+   display: none;
+}
+
+.name::placeholder {
+   color: rgba(255, 255, 255, 0.7);
+}
+
+/* 이름 적는 input창 꾸미기 */
+.underline-input {
+   border: none;
+   border-bottom: 2px solid rgb(255, 255, 255);
+   background-color: transparent;
+   padding: 3px;
+   outline: none;
+   font-size: 48px;
+}
+
+.option,
+.say_box,
+.todo {
+   background-color: rgba(205, 255, 238, 0.3);
+   height: 60px;
+   line-height: 60px;
+}
+
+.links,
+.add_tools {
+   background-color: rgba(205, 255, 238, 0.3);
+   width: 200px;
+   height: 80px;
+   line-height: 80px;
+}
+
+.say_box p {
+   height: 30px;
+   line-height: 35px;
+}
+
+.say_box {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
 }
 
 .footer {
-  width: 100%;
-  background-color: rgba(245, 255, 255, 0.1);
-  height: 80px;
+   display: flex;
+   width: 100%;
+   background-color: rgba(245, 255, 255, 0.1);
+   height: 90px;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 10px;
+}
+
+.wise_say {
+   font-size: 20px;
+}
+
+.say_person {
+   display: none;
 }
