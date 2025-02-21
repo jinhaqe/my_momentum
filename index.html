@@ -11,29 +11,67 @@
       <div class="container">
          <div class="content">
             <div class="header">
-               <div class="links">링크 주세욧!!</div>
-               <div class="add_tools">옵션</div>
+               <div class="links">
+                  <div class="link"></div>
+                  <div class="d_day"></div>
+               </div>
+               <div class="add_tools">
+                  <div class="test">테스트</div>
+                  <div class="weather">
+                     <img class="weather_icon" src="./img/icon/default.png" />
+                     <span class="weather_temp">Loading.. </span>
+                  </div>
+               </div>
             </div>
             <div class="time_box">
                <div class="date"></div>
-               <div class="time"></div>
+               <div class="time_add">
+                  <div class="time"></div>
+               </div>
                <div class="messege_box">
-                  <span class="messege">Good morning</span>
+                  <span class="messege"></span>
                   <input
                      type="text"
                      class="name underline-input"
                      placeholder="name"
                   />
                </div>
+               <div class="little_todo">
+                  <div class="day_one">What is your main goal for today?</div>
+                  <input
+                     type="text"
+                     class="one_list underline-input"
+                     placeholder=""
+                  />
+               </div>
             </div>
             <div class="footer">
-              <div class="option">옵션</div>
-              <div class="say_box">
-                <p class="wise_say">안녕 이한이에요</p>
-                <p class="say_person">이한</p>
-              </div>
-              <div class="todo">투두</div>
+               <div class="option">
+                  <div class="image"></div>
+                  <div class="add">추가</div>
+               </div>
+               <div class="say_box">
+                  <p class="wise_say"></p>
+                  <p class="say_person"></p>
+               </div>
+               <div class="list_box">
+                  <div class="note" id="openMemoButton"></div>
+                  <div class="todo"></div>
+               </div>
+            </div>
          </div>
+
+         <!-- 메모 창 -->
+         <div id="memo" class="memo">
+            <div class="memo-header">
+               <span>메모 제목</span>
+               <button class="closeMemoButton" id="close_btn">X</button>
+            </div>
+            <textarea placeholder="메모 내용을 입력하세요..."></textarea>
+            <button id="save" class="closeMemoButton">취소</button>
+            <button id="save">저장</button>
+         </div>
+         <div class="close_btn"></div>
       </div>
 
       <script src="./js/main.js"></script>
