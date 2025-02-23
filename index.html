@@ -12,9 +12,10 @@
          <div class="content">
             <div class="header">
                <div class="links">
+                  <div class="image"></div>
                   <div class="link"></div>
-                  <div class="d_day"></div>
                </div>
+               <div class="user_space"></div>
                <div class="add_tools">
                   <div class="test">테스트</div>
                   <div class="weather">
@@ -27,12 +28,13 @@
                <div class="date"></div>
                <div class="time_add">
                   <div class="time"></div>
+                  <button class="add_option">💌</button>
                </div>
                <div class="messege_box">
                   <span class="messege"></span>
                   <input
                      type="text"
-                     class="name underline-input"
+                     class="name underline-input first_input"
                      placeholder="name"
                   />
                </div>
@@ -40,40 +42,81 @@
                   <div class="day_one">What is your main goal for today?</div>
                   <input
                      type="text"
-                     class="one_list underline-input"
+                     class="one_list underline-input first_input"
                      placeholder=""
                   />
                </div>
             </div>
-            <div class="footer">
-               <div class="option">
-                  <div class="image"></div>
-                  <div class="add">추가</div>
-               </div>
+            <div class="last_box">
                <div class="say_box">
                   <p class="wise_say"></p>
                   <p class="say_person"></p>
                </div>
-               <div class="list_box">
-                  <div class="note" id="openMemoButton"></div>
-                  <div class="todo"></div>
+               <div class="footer">
+                  <div class="option">
+                     <div class="d_day"></div>
+                     <div class="add">추가</div>
+                  </div>
+
+                  <div class="list_box">
+                     <div class="note" id="openmemo"></div>
+                     <div class="todo" id="opentodo"></div>
+                  </div>
                </div>
             </div>
          </div>
 
          <!-- 메모 창 -->
-         <div id="memo" class="memo">
+         <div id="memo" class="memo_popup">
             <div class="memo-header">
                <span>메모 제목</span>
-               <button class="closeMemoButton" id="close_btn">X</button>
+               <button class="closememoButton" id="close_btn">X</button>
             </div>
             <textarea placeholder="메모 내용을 입력하세요..."></textarea>
-            <button id="save" class="closeMemoButton">취소</button>
+            <button id="save" class="closememoButton">취소</button>
             <button id="save">저장</button>
          </div>
-         <div class="close_btn"></div>
       </div>
 
-      <script src="./js/main.js"></script>
+      <!-- 투두 창 -->
+      <div id="todo" class="todo_popup">
+         <div class="todo-header">
+            <span>To-Do-List</span>
+            <button class="closetodoButton" id="close_btn">X</button>
+         </div>
+         <div class="list">
+            <ul>
+               <li>
+                  <div class="list_info1">
+                     <input type="checkbox" class="check" />
+                     <span>사과</span>
+                  </div>
+                  <div class="list_info2">
+                     <button class="list_close">x</button>
+                  </div>
+               </li>
+               <li>사과</li>
+               <li>사과</li>
+               <li>사과</li>
+               <li>사과</li>
+               <li>사과</li>
+               <li>사과</li>
+            </ul>
+         </div>
+         <div class="todo-footer">
+            <input type="text" class="todo_input" />
+            <button class="todo_add">+</button>
+         </div>
+      </div>
    </body>
+
+   <!-- 슬라이드 팝업 -->
+   <div class="popup" id="popup">
+      <div class="popup-content">
+         <button class="close-popup" id="closePopup">x</button>
+         <p>여기에 슬라이드 팝업 내용</p>
+      </div>
+   </div>
+
+   <script src="./js/main.js"></script>
 </html>

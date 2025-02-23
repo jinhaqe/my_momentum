@@ -11,19 +11,14 @@ body {
    background-repeat: no-repeat;
 }
 
-.header {
-   display: flex;
+.container {
+   position: relative;
    width: 100%;
-   background-color: rgba(206, 255, 255, 0.1);
-   height: 100px;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
    justify-content: space-between;
-   align-items: center;
-   padding: 0 10px;
-}
-
-.date {
-   color: white;
-   font-size: 30px;
+   text-align: center;
 }
 
 .content {
@@ -35,21 +30,44 @@ body {
    text-align: center;
 }
 
-.links {
+/* Header */
+.header {
    display: flex;
-   justify-content: space-around;
+   width: 100%;
+   height: 100px;
+   justify-content: space-between;
    align-items: center;
+   padding: 0 10px;
 }
 
+.date {
+   color: white;
+   font-size: 30px;
+}
+
+/* Time box */
 .time_box {
    margin-bottom: 40px;
+}
+
+.time_add {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 20px;
+}
+
+.add_option {
+   visibility: hidden;
+   margin-left: 10px;
 }
 
 .time {
    font-size: 144px;
    color: white;
    height: 150px;
-   line-height: 120px;
+   line-height: 140px;
+   padding-left: 40px;
 }
 
 .messege_box {
@@ -112,14 +130,31 @@ input:focus::placeholder {
    outline: none;
 }
 
+.user_space,
 .add_tools,
 .links,
 .option,
 .list_box {
    background-color: rgba(205, 255, 238, 0.3);
-   width: 300px;
+   width: 200px;
    height: 60px;
    line-height: 60px;
+}
+
+.user_space {
+   display: none;
+}
+
+.image.active {
+   transform: scale(1.2);
+   transition: transform 0.3s ease;
+}
+
+.links {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   transition: width 0.3s ease;
 }
 
 .todo {
@@ -169,6 +204,7 @@ input:focus::placeholder {
    align-items: center;
    justify-content: center;
    flex-direction: column;
+   height: 60px;
 }
 
 .list_box {
@@ -179,15 +215,21 @@ input:focus::placeholder {
    gap: 20px;
 }
 
+.last_box {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
 .footer {
    display: flex;
    width: 100%;
-   background-color: rgba(245, 255, 255, 0.1);
    height: 90px;
    justify-content: space-between;
    align-items: center;
    padding: 0 10px;
-   transition: bottom 0.3s ease; /* 부드럽게 푸터가 나타난다 */
+   transition: bottom 0.3s ease;
 }
 
 /* 고정 푸터 상태 */
@@ -195,7 +237,7 @@ input:focus::placeholder {
    position: fixed;
    bottom: 0;
    width: 100%;
-   transition: bottom 0.3s ease; /* 부드럽게 아래로 고정 */
+   transition: bottom 0.3s ease;
 }
 
 .option {
@@ -204,22 +246,21 @@ input:focus::placeholder {
    align-items: center;
 }
 
+.image.active {
+   transform: scale(1.2);
+   transition: transform 0.3s ease;
+}
+
 .image {
    width: 40px;
    height: 40px;
    background-image: url(../img/icon/image.png);
-}
-
-.close_btn {
-   display: none;
-   width: 40px;
-   height: 40px;
-   background-image: url(../img/icon/image.png);
+   position: relative;
+   transition: none;
 }
 
 .wise_say {
    font-size: 20px;
-   height: 60px;
 }
 
 .say_person {
@@ -233,7 +274,7 @@ input:focus::placeholder {
 }
 
 .container {
-   position: relative; /* 부모 요소에 relative를 설정 */
+   position: relative;
    width: 100%;
    height: 100vh;
    display: flex;
@@ -243,35 +284,43 @@ input:focus::placeholder {
 }
 
 /* 메모 창 스타일 */
-.memo {
+.memo_popup,
+.todo_popup {
    position: absolute;
-   right: 0;
+   right: 20px;
    bottom: 100px;
    width: 300px;
    height: 350px;
-   background-color: rgba(83, 83, 83, 0.8);
+   background-color: rgba(255, 255, 255, 0.8);
    color: white;
    padding: 20px;
    display: none;
    border-radius: 10px;
 }
 
-.memo-header {
+.memo-header,
+.todo-header {
    display: flex;
    justify-content: space-between;
    align-items: center;
    margin-bottom: 25px;
+   color: rgb(96, 96, 96);
 }
 
-.memo textarea {
+.todo-header {
+   margin-bottom: 15px;
+}
+
+.memo_popup textarea {
    width: 100%;
    height: 75%;
-   background-color: rgba(255, 255, 255, 0.2);
-   color: white;
+   background-color: rgba(255, 255, 255, 0.7);
+   color: rgb(69, 69, 69);
    border: none;
    padding: 10px;
    border-radius: 5px;
    resize: none;
+   box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 #close_btn {
@@ -286,4 +335,204 @@ input:focus::placeholder {
    float: right;
    margin-top: 10px;
    margin-right: 10px;
+}
+
+.list {
+   width: 100%;
+   height: 70%;
+}
+
+ul {
+   padding: 10px 0 0 0;
+   max-height: 215px;
+   overflow-y: auto;
+}
+
+li {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 95%;
+   height: 45px;
+   background-color: rgb(255, 255, 255);
+   border-radius: 5px;
+   color: black;
+   list-style: none;
+   margin-bottom: 10px;
+   padding: 6px;
+}
+
+.list_close {
+   border: 0;
+   width: 20px;
+   height: 20px;
+   background-color: transparent;
+   margin-bottom: 2px;
+}
+
+.check {
+   margin: 0 8px;
+}
+
+::-webkit-scrollbar {
+   width: 8px;
+   height: 4px;
+}
+
+::-webkit-scrollbar-track {
+   background-color: #f1f1f1;
+   border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+   background-color: #888;
+   border-radius: 10px;
+   border: 2px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background-color: #555;
+}
+
+::-webkit-scrollbar-corner {
+   background-color: #f1f1f1;
+   border-radius: 10px;
+}
+
+.todo-footer {
+   width: 100%;
+   height: 15%;
+   margin-top: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(255, 255, 255, 0.7);
+   border-radius: 10px;
+}
+
+.todo_input {
+   min-width: 80%;
+   max-width: 80%;
+   width: 80%;
+   height: 30px;
+   padding-left: 5px;
+}
+
+.todo_add {
+   margin-left: 5px;
+   width: 30px;
+   height: 30px;
+}
+
+/* 슬라이드 팝업 기본 스타일 */
+.popup {
+   display: none;
+   position: fixed;
+   bottom: -100%;
+   left: 0;
+   width: 300px;
+   height: 200px;
+   background-color: #f4f4f4;
+   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+   transition: bottom 0.5s ease-in-out;
+   padding: 20px;
+   box-sizing: border-box;
+   z-index: 1000;
+}
+
+.popup .popup-content {
+   padding: 10px;
+   font-size: 16px;
+   color: #333;
+}
+
+.popup .close-popup {
+   position: absolute;
+   background-color: transparent;
+   top: 7px;
+   right: 10px;
+   font-size: 20px;
+   cursor: pointer;
+   border: 0;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+   .time {
+      font-size: 100px;
+   }
+
+   .day_one {
+      font-size: 25px;
+   }
+
+   .one_list {
+      min-width: 80%;
+      max-width: 80%;
+      font-size: 25px;
+   }
+
+   .name {
+      font-size: 30px;
+      width: 100px;
+   }
+
+   .header,
+   .footer {
+      justify-content: center;
+      align-items: center;
+   }
+
+   .messege {
+      font-size: 40px;
+   }
+
+   .add_tools {
+      margin-left: 10px;
+   }
+
+   .list_box {
+      align-items: center;
+   }
+
+   .wise_say,
+   .say_person {
+      font-size: 20px;
+   }
+}
+
+@media (max-width: 480px) {
+   .time {
+      font-size: 60px;
+   }
+
+   .one_list {
+      font-size: 20px;
+   }
+
+   .name {
+      font-size: 20px;
+   }
+
+   .messege {
+      font-size: 30px;
+   }
+
+   .popup {
+      width: 250px;
+      height: 150px;
+   }
+
+   .popup .popup-content {
+      font-size: 14px;
+   }
+
+   .time_box {
+      margin: 0;
+   }
+
+   .wise_say,
+   .say_person {
+      font-size: 15px;
+   }
 }

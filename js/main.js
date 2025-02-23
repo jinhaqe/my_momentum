@@ -42,7 +42,7 @@ let timeID = setInterval(() => {
 /**
  ** input 창 너비 늘리기
  **/
-const inputElement = $("input");
+const inputElement = $(".first_input");
 
 // 텍스트 입력 시마다 너비를 동적으로 조정
 inputElement.on("input", function () {
@@ -102,17 +102,34 @@ $(document).ready(function () {
 });
 
 /**
- ** 메모창 애니메이션 적용하기기
+ ** 메모창 애니메이션 적용하기
  **/
 $(document).ready(function () {
    // 메모 창 열기
-   $("#openMemoButton").on("click", function () {
-      $("#memo").fadeIn(); // 메모 창을 부드럽게 나타나게
+   $("#openmemo").on("click", function () {
+      $("#memo").fadeToggle(); // 메모 창을 부드럽게 나타나게
+      $("#todo").fadeOut(); // 메모 창을 부드럽게 사라지게
    });
 
    // 메모 창 닫기
-   $(".closeMemoButton").on("click", function () {
+   $(".closememoButton").on("click", function () {
       $("#memo").fadeOut(); // 메모 창을 부드럽게 사라지게
+   });
+});
+
+/**
+ ** 투두창 애니메이션 적용하기
+ **/
+$(document).ready(function () {
+   // 메모 창 열기
+   $("#opentodo").on("click", function () {
+      $("#todo").fadeToggle();
+      $("#memo").fadeOut();
+   });
+
+   // 메모 창 닫기
+   $(".closetodoButton").on("click", function () {
+      $("#todo").fadeOut(); // 메모 창을 부드럽게 사라지게
    });
 });
 
@@ -172,14 +189,86 @@ async function getLocation() {
 // 위치를 가져오고 날씨를 표시
 getLocation();
 
+/**
+ ** 이미지 아이콘 기능
+ **/
+let isHidden = false; // 상태 추적 변수
+
 $(".image").on("click", () => {
-   // .container의 보임/숨김을 토글
-   $(".container").fadeOut(200);
-   $(".close_btn").fadeIn(200);
+   if (isHidden) {
+      // 원래 상태로 복구
+      $(".link").fadeIn(200, () => {
+         // 애니메이션 끝난 후에 width 변경
+         $(".links").css("width", "200px");
+      });
+      $(".add_tools, .user_space, .time_box, .messege_box, .last_box") // .little_todo 제외한 나머지 요소들
+         .not(".image") // 제외할 자식 요소
+         .fadeIn(200); // 나머지 요소만 부드럽게 나타내기
+   } else {
+      // 나머지 요소 숨기기
+      $(".link").fadeOut(200);
+      $(".add_tools, .user_space, .time_box, .messege_box, .last_box") // .little_todo 제외한 나머지 요소들
+         .not(".image") // 제외할 자식 요소
+         .fadeOut(200); // 나머지 요소만 부드럽게 나타내기
+
+      // width 변경을 마지막에 처리해 부드럽게 보이도록 설정
+      setTimeout(() => {
+         $(".links").css("width", "100px");
+      }, 200); // 200ms 이후에 width 변경 (애니메이션 끝나고 나서)
+   }
+
+   // .image 아이콘 스타일 변경 (예: 크기 조정)
+   $(".image").toggleClass("active"); // active 클래스 추가/제거
+
+   isHidden = !isHidden; // 상태를 반전시킴
 });
 
-$(".close_btn").on("click", () => {
-   // .container를 다시 숨기거나 보이게 토글
-   $(".container").fadeIn(200);
-   $(".close_btn").css("display", "none");
+/**
+ ** add_option 버튼의 상태 조정하기
+ **/
+$(document).ready(function () {
+   // 'add_option' 버튼을 클릭하면 팝업을 아래로 띄우거나 숨기기
+   $(".add_option").click(function () {
+      // 버튼의 위치를 가져옴
+      var buttonOffset = $(".add_option").offset();
+
+      // 팝업이 보이고 있다면 숨기고, 그렇지 않으면 띄우기
+      if ($("#popup").is(":visible")) {
+         $("#popup").fadeOut();
+         $(".add_option").css("visibility", "visible"); // 팝업 닫을 때 add_option 보이도록 유지
+      } else {
+         // 팝업을 버튼 바로 아래에 위치시킴
+         $("#popup")
+            .css({
+               top: buttonOffset.top + $(".add_option").outerHeight() + 10,
+               left: buttonOffset.left,
+            })
+            .fadeIn(); // 팝업을 표시
+
+         $(".add_option").css("visibility", "visible"); // 팝업이 열릴 때 버튼 보이게
+      }
+   });
+
+   // 'closePopup' 버튼을 클릭하면 팝업 닫기
+   $("#closePopup").click(function () {
+      // 팝업을 닫음
+      $("#popup").fadeOut();
+      $(".add_option").css("visibility", "visible"); // 팝업 닫힐 때도 add_option 보이게 유지
+   });
+
+   // 'time_add' 버튼에 마우스 오버 시
+   $(".time_add").on("mouseover", function () {
+      // 팝업이 열려 있지 않으면 visibility를 보여줌
+      if (!$("#popup").is(":visible")) {
+         $(".add_option").css("visibility", "visible");
+      }
+   });
+
+   // 'time_add' 버튼에서 마우스 나갈 때
+   $(".time_add").on("mouseleave", function () {
+      // 팝업이 열려 있지 않으면 visibility를 숨김
+      if (!$("#popup").is(":visible")) {
+         $(".add_option").css("visibility", "hidden");
+      }
+   });
 });
