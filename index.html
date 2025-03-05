@@ -8,8 +8,18 @@
       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
    </head>
    <body>
+      <div id="sidebar" class="sidebar">
+         <div class="sidebar-content">
+            <h2>Sidebar</h2>
+            <p>Some content here...</p>
+         </div>
+      </div>
+
       <div class="container">
          <div class="content">
+            <button id="open-sidebar" class="open-sidebar">
+               <span></span>
+            </button>
             <div class="header">
                <div class="links">
                   <div class="image"></div>
@@ -55,7 +65,7 @@
                <div class="footer">
                   <div class="option">
                      <div class="d_day"></div>
-                     <div class="add">추가</div>
+                     <div class="add"></div>
                   </div>
 
                   <div class="list_box">
@@ -85,27 +95,11 @@
             <button class="closetodoButton" id="close_btn">X</button>
          </div>
          <div class="list">
-            <ul>
-               <li>
-                  <div class="list_info1">
-                     <input type="checkbox" class="check" />
-                     <span>사과</span>
-                  </div>
-                  <div class="list_info2">
-                     <button class="list_close">x</button>
-                  </div>
-               </li>
-               <li>사과</li>
-               <li>사과</li>
-               <li>사과</li>
-               <li>사과</li>
-               <li>사과</li>
-               <li>사과</li>
-            </ul>
+            <ul></ul>
          </div>
          <div class="todo-footer">
             <input type="text" class="todo_input" />
-            <button class="todo_add">+</button>
+            <button class="todo_add" onclick="btn_event()">+</button>
          </div>
       </div>
    </body>

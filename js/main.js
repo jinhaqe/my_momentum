@@ -272,3 +272,112 @@ $(document).ready(function () {
       }
    });
 });
+
+// 투두리스트 기능 추가
+// 할 일 항목을 관리할 배열
+let todoItem_list = [];
+
+function btn_event() {
+   // 입력값이 빈 값일 경우
+   if ($(".todo_input").val().trim() === "") {
+      alert("내용을 입력해주세요!");
+      return;
+   }
+
+   let text_value = $(".todo_input").val();
+   $(".todo_input").val(""); // 입력 필드 비우기
+
+   // 객체로 할 일 항목 관리
+   let todoItem = {
+      id: Date.now(), // 고유 id
+      text: text_value, // 할 일 텍스트
+      checked: false, // 체크 여부
+   };
+
+   // <li> 항목 생성
+   let newli = $("<li></li>").attr("id", todoItem.id);
+
+   // 제목과 삭제 버튼을 포함하는 div 요소
+   let title_div = $("<div></div>").addClass("list_info1");
+   let close_div = $("<div></div>").addClass("list_info2");
+
+   // 체크박스 생성
+   let check_Input = $("<input>").attr("type", "checkbox").addClass("check");
+
+   // 텍스트(span) 생성
+   let List_span = $("<span></span>").text(todoItem.text);
+
+   // 생성된 체크박스와 텍스트를 title_div에 추가
+   title_div.append(check_Input);
+   title_div.append(List_span);
+
+   // 삭제 버튼 생성
+   let close_btn = $("<button></button>").text("x").addClass("list_close");
+
+   // 삭제 버튼을 close_div에 추가
+   close_div.append(close_btn);
+
+   // <li> 항목에 title_div와 close_div 추가
+   newli.append(title_div);
+   newli.append(close_div);
+
+   // <ul>에 새 항목 추가
+   $("ul").append(newli);
+
+   // **할 일 항목을 배열에 추가**
+   todoItem_list.push(todoItem);
+   console.log(todoItem_list); // 할 일 목록 확인
+
+   // 삭제 버튼 클릭 시 항목 제거
+   close_btn.on("click", () => {
+      newli.remove();
+      // 배열에서 해당 항목 삭제 (ID를 기준으로 삭제)
+      todoItem_list = todoItem_list.filter((item) => item.id !== todoItem.id);
+      console.log(todoItem_list); // 배열에서 삭제된 후의 상태 확인
+   });
+
+   // 텍스트 더블클릭 시 수정
+   List_span.on("dblclick", function () {
+      let currentText = $(this).text(); // 현재 텍스트 가져오기
+      let input = $("<input>").val(currentText).addClass("new_input");
+
+      // span을 입력 필드로 교체
+      $(this).html(input);
+
+      // 입력 필드에 포커스를 주고 keydown 이벤트 설정
+      input.focus().on("keydown", function (event) {
+         if (event.key === "Enter") {
+            // 입력값이 빈 값이라면 경고창 띄우기
+            if (input.val().trim() === "") {
+               alert("빈 값은 입력할 수 없습니다!");
+               return;
+            }
+
+            // 빈 값이 아니라면 span 텍스트를 입력 값으로 업데이트
+            todoItem.text = input.val(); // 객체의 텍스트를 업데이트
+            $(this).parent().text(input.val()); // DOM 요소 업데이트
+         }
+      });
+   });
+
+   // 체크박스 클릭 시 체크 상태 변경
+   check_Input.on("change", function () {
+      todoItem.checked = $(this).prop("checked"); // 객체의 체크 상태 업데이트
+   });
+}
+
+$("#open-sidebar").click(function () {
+   $("#sidebar").toggleClass("open"); // 사이드바 열고 닫기
+   $(this).toggleClass("open"); // 화살표 버튼 회전 (화살표 방향 변경)
+
+   // 화살표 버튼 회전
+   if ($("#sidebar").hasClass("open")) {
+      $(this).css("margin-left", "40px");
+      setTimeout(() => {
+         $(this).css("transform", "rotate(180deg)"); // 180도 회전
+      }, 500);
+   } else {
+      $(this).css("margin-left", "20px");
+      $(this).css("transform", "rotate(0deg)"); // 원래 방향으로 되돌리기
+   }
+});
