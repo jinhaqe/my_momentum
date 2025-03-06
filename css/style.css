@@ -6,9 +6,10 @@
 }
 
 body {
-   background-image: url(../img/img2.jpg);
-   background-size: cover;
-   background-repeat: no-repeat;
+   background-size: cover; /* 이미지가 화면에 맞게 조정됨 */
+   background-position: center; /* 이미지가 중앙에 위치 */
+   background-repeat: no-repeat; /* 이미지가 반복되지 않음 */
+   min-height: 100vh; /* 전체 화면 높이를 가짐 */
 }
 
 .container {
@@ -534,7 +535,7 @@ li {
    left: -250px;
    width: 250px;
    height: 100vh;
-   background-color: #333;
+   background-color: rgba(211, 211, 211, 1);
    color: white;
    padding: 20px;
    z-index: 998;

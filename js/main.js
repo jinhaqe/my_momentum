@@ -61,6 +61,20 @@ $(".say_box").on("mouseleave", () => {
    $(".say_person").stop().slideUp(500); // 애니메이션을 멈추고 슬라이드 업
 });
 
+const backgroundImages = [
+   "./img/img1.jpg",
+   "./img/img2.jpg",
+   "./img/img3.jpg",
+   "./img/img4.jpg",
+   "./img/img5.jpg",
+   "./img/img6.jpg",
+   "./img/img7.jpg",
+   "./img/img8.jpg",
+   "./img/img9.jpg",
+   "./img/img10.jpg",
+   "./img/img11.jpg",
+];
+
 // 명언 목록
 const say = {
    saying: {
@@ -95,6 +109,21 @@ function random() {
    // 명언과 사람 텍스트에 따옴표 추가
    ran_wise_say.html(`" ${ran_wise_say.text()} "`); // 따옴표 추가
    ran_person.html(`- ${ran_person.text()} -`); // 따옴표 추가
+
+   let randomImage =
+      backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+
+   $("body").css("background-image", `url(${randomImage})`);
+
+   // 특정 이미지에 대해서만 p 태그의 색을 변경
+   if (randomImage === "./img/img2.jpg" || randomImage === "./img/img8.jpg") {
+      $(".wise_say").css("color", "black");
+      $(".say_person").css("color", "black");
+   } else {
+      // 다른 이미지일 경우 색상 초기화 (필요한 경우)
+      $(".wise_say").css("color", "white");
+      $(".say_person").css("color", "white");
+   }
 }
 
 $(document).ready(function () {
