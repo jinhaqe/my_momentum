@@ -302,8 +302,10 @@ $(document).ready(function () {
    });
 });
 
-// 투두리스트 기능 추가
-// 할 일 항목을 관리할 배열
+/**
+ ** 투두리스트 기능 추가
+ ** 할 일 항목을 관리할 배열 생성
+ */
 let todoItem_list = [];
 
 function btn_event() {
@@ -389,11 +391,32 @@ function btn_event() {
       });
    });
 
-   // 체크박스 클릭 시 체크 상태 변경
+   // 체크박스 클릭 시 체크 상태 변경 및 텍스트에 줄 그어주기
    check_Input.on("change", function () {
       todoItem.checked = $(this).prop("checked"); // 객체의 체크 상태 업데이트
+
+      // 체크 상태에 따라 텍스트에 줄을 그어주거나 제거
+      if (todoItem.checked) {
+         List_span.css("text-decoration", "line-through"); // 줄 긋기
+         List_span.css("opacity", "0.5"); // 줄 긋기
+      } else {
+         List_span.css("text-decoration", "none"); // 줄 없애기
+         List_span.css("opacity", "1"); // 줄 긋기
+      }
    });
 }
+
+// 엔터 키 이벤트를 통해 할 일 추가
+$(".todo_input").on("keydown", function (event) {
+   if (event.key === "Enter") {
+      event.preventDefault(); // 기본 엔터키 동작 방지 (폼 제출 방지)
+      btn_event(); // 엔터키가 눌리면 할 일 추가
+   }
+});
+
+/**
+ ** 사이드 바 화살표 애니메이션 설정
+ */
 
 $("#open-sidebar").click(function () {
    $("#sidebar").toggleClass("open"); // 사이드바 열고 닫기
